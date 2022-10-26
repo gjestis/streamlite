@@ -1,8 +1,9 @@
 #Import packages
 import random
 import matplotlib.pyplot as plt
+import streamlit as st
 
-#Make two dices function
+#Roll two dices function
 def roll_dice():
     die_1 = random.randint(1,6)
     die_2 = random.randint(1,6)
@@ -37,17 +38,17 @@ def bettin_montecarlo_sim(number_of_simulations,max_number_of_rolls,bet_per_roll
         win_probability.append(num_wins / num_rolls[-1])
         end_balance.append(balance[-1])
         plt.plot(num_rolls, balance)
+
     plt.title("Monte Carlo Dice Game [" + str(num_simulations) + " simulations]")
     plt.xlabel("Roll Number")
     plt.ylabel("Balance [$]")
     plt.xlim([0, max_num_rolls])
-    plt.show()
+    st.pyplot()
 
     overall_win_probability = sum(win_probability) / len(win_probability)
     overall_end_balance = sum(end_balance) / len(end_balance)
-    print("Average win probability after " + str(num_simulations) + "   runs: " + str(overall_win_probability))
-    print("Average ending balance after " + str(num_simulations) + " runs: $" + str(overall_end_balance))
+    return overall_win_probability, overall_end_balance
+    #print("Average win probability after " + str(num_simulations) + "   runs: " + str(overall_win_probability))
+    #print("Average ending balance after " + str(num_simulations) + " runs: $" + str(overall_end_balance))
 
 
-bettin_montecarlo_sim(100,100,1,100,0.2)
-#%%
